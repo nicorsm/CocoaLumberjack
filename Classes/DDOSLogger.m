@@ -22,11 +22,11 @@ static DDOSLogger *sharedInstance;
 
 + (instancetype)sharedInstance {
     static dispatch_once_t DDOSLoggerOnceToken;
-
+    
     dispatch_once(&DDOSLoggerOnceToken, ^{
         sharedInstance = [[[self class] alloc] init];
     });
-
+    
     return sharedInstance;
 }
 
@@ -34,11 +34,11 @@ static DDOSLogger *sharedInstance;
     if (sharedInstance != nil) {
         return nil;
     }
-
+    
     if (self = [super init]) {
         return self;
     }
-
+    
     return nil;
 }
 
@@ -55,16 +55,16 @@ static DDOSLogger *sharedInstance;
         
         switch (logMessage->_flag) {
             case DDLogFlagError     :
-                os_log_error(OS_LOG_DEFAULT, "%{public}s", msg);
+                os_log_error(OS_LOG_DEFAULT, "%s", msg);
                 break;
             case DDLogFlagWarning   :
             case DDLogFlagInfo      :
-                os_log_info(OS_LOG_DEFAULT, "%{public}s", msg);
+                os_log_info(OS_LOG_DEFAULT, "%s", msg);
                 break;
             case DDLogFlagDebug     :
             case DDLogFlagVerbose   :
             default                 :
-                os_log_debug(OS_LOG_DEFAULT, "%{public}s", msg);
+                os_log_debug(OS_LOG_DEFAULT, "%s", msg);
                 break;
         }
     }
@@ -75,3 +75,4 @@ static DDOSLogger *sharedInstance;
 }
 
 @end
+
